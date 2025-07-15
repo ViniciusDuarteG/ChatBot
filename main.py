@@ -15,7 +15,7 @@ def Responder(pergunta):
     for produto in ListaDeProdutos:
         if produto in pergunta:
             return f"O preço do(a) {produto.title()} é {ListaDeProdutos[produto]}."
-
+#Aqui pensei em pessoas que provavelmente irão escrever certo e errado, então para não gerar um looping
     if "preço" in pergunta or "preco" in pergunta or "presso" in pergunta:
         return "De qual produto você gostaria de saber o preço?"
 
