@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot Loja</title>
+</head>
+<body>
+  <h1>Chatbot Loja</h1>
+
+  <div id="chat" style="border: 1px solid #ccc; padding: 10px; width: 400px; height: 300px; overflow-y: scroll;"></div>
+  
+  <!-- Adicionei um formulário e o event listener para Enter -->
+  <form onsubmit="enviar(); return false;">
+    <input type="text" id="mensagem" placeholder="Digite aqui..." style="width: 300px;">
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const chat = document.getElementById("chat");
+    document.getElementById("mensagem").value="";
+
+    // ✅ Mensagem automática ao iniciar
+    function mensagemInicial() {
+      const msg = "Olá,<br>1 - Para iniciar o atendimento<br>2 - Encerrar o atendimento";
+      chat.innerHTML += `<p><strong>Bot:</strong> ${msg}</p>`;
+    }
+
+    async function enviar() {
+      const entrada = document.getElementById("mensagem").value;
+
+      if (!entrada.trim()) return;
+
+      chat.innerHTML += `<p><strong>Você:</strong> ${entrada}</p>`;
+
+      const resposta = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ mensagem: entrada })
+      });
+
+      const dados = await resposta.json();
+      chat.innerHTML += `<p><strong>Bot:</strong> ${dados.resposta}</p>`;
+      document.getElementById("mensagem").value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    // ✅ Chama a primeira mensagem ao carregar a página
+    window.onload = mensagemInicial;
+  </script>
+</body>
+</html>
