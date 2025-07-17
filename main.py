@@ -8,21 +8,33 @@ ListaDeProdutos = {
     "mesa": "R$ 700,00",
     "cadeira": "R$ 250,00"
 }
-
+#nessa função colocar as respostas é crucial
+#lembre-se que utilizar o if ou a biblioteca para situações diferentes
 def Responder(pergunta):
     pergunta = pergunta.lower()
 
     for produto in ListaDeProdutos:
         if produto in pergunta:
             return f"O preço do(a) {produto.title()} é {ListaDeProdutos[produto]}."
-#Aqui pensei em pessoas que provavelmente irão escrever certo e errado, então para não gerar um looping
-    if "preço" in pergunta or "preco" in pergunta or "presso" in pergunta:
+
+    if "preço" in pergunta or "preco" in pergunta or "presso" in pergunta or "preso" in pergunta:
         return "De qual produto você gostaria de saber o preço?"
+    
+    if "qual o seu objetivo" in pergunta: 
+        return "Sou um chatbot demonstrativo, possuo uma quantidade limitada de interações. Posso responder dados, como uma pequena lista de produtos de casaque eu tenho, como uma cama, um sofá e uma mesa."
+
+    if "desenvolveu" in pergunta or "desenvolvedor" in pergunta or "dev" in pergunta:
+        return "Bom, fui desenvolvido por Vinicius Duarte, pode contacta-lo pelo LinkedIn ou pelo Github que estão no roda-pé da página."
 
     respostas = {
         "1": "Certo, como posso ajudar?",
         "2": "Até logo!",
-        "bom dia": "Bom dia! Em que posso te ajudar?"
+        "bom dia": "Olá! Em que posso te ajudar?",
+        "oi":"Olá! Em que posso te ajudar?",
+        "olá":"Olá! Em que posso te ajudar?",
+        "boa tarde":"Olá! Em que posso te ajudar?",
+        "boa noite":"Olá! Em que posso te ajudar?",
+        "ola":"Olá! Em que posso te ajudar?",
     }
 
     return respostas.get(pergunta, "Desculpe, não entendi sua pergunta.")
