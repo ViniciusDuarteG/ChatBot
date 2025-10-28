@@ -2,7 +2,7 @@
 
 Esse é um sistema simples de chat bot, feito em Python, com front-end em HTML e CSS
 
-##Funcionalidade
+## Funcionalidade
 
 - Interagir com o usuário
 - Explicar suas funcionalidades
@@ -10,12 +10,12 @@ Esse é um sistema simples de chat bot, feito em Python, com front-end em HTML e
 - Mostrar itens mesmo com ortografia errada
 - Gerar mensagem de que não foi possível entender o comando
 
-  ## Tecnologias utilizadas
+## Tecnologias utilizadas
   - Python 3
   - Flask
   - Html5
   - CSS3
 
-##Execução para testes
+##E xecução para testes
 - Execute o python main.py
 - Acesse o seu local host, o IP irá gerar no terminal  
