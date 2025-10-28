@@ -16,6 +16,6 @@ Esse é um sistema simples de chat bot, feito em Python, com front-end em HTML e
   - Html5
   - CSS3
 
-##E xecução para testes
+## Execução para testes
 - Execute o python main.py
 - Acesse o seu local host, o IP irá gerar no terminal  
