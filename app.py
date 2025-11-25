@@ -27,8 +27,8 @@ def Responder(pergunta):
         return "Bom, fui desenvolvido por Vinicius Duarte, pode contacta-lo pelo LinkedIn ou pelo Github que estão no roda-pé da página."
 
     respostas = {
-        "1": "Certo, como posso ajudar?",
-        "2":"Sou um chatBot desenvolvido por Vinícius Duarte, meu objetivo é simular um atendimento real de um marketplace, porém posso ser utilizado para outros objetivos",
+        "1":"Sou um chatBot desenvolvido por Vinícius Duarte, meu objetivo é simular um atendimento real de um marketplace, porém posso ser utilizado para outros objetivos",
+        "2":"Informações sobre o Vinícius Duarte, estão link a seguir",
         "0": "Até logo!",
         "bom dia": "Olá! Em que posso te ajudar?",
         "oi":"Olá! Em que posso te ajudar?",
@@ -46,7 +46,7 @@ def index():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    print("Olá, \n1 - Para iniciar o atendimento\n2 - Informações para o usuário\n0 - Encerrar o atendimento")
+    print("Olá, \n1 - Informações do chatbot\n2 - Informações do desenvolvedor\n0 - Encerrar o atendimento")
     dados = request.get_json()
     pergunta = dados.get("mensagem", "")
     resposta = Responder(pergunta)
@@ -54,3 +54,4 @@ def chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
