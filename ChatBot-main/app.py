@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -41,7 +41,7 @@ def Responder(pergunta):
 
 @app.route("/")
 def index():
-    return send_from_directory(".", "index.html")  # carrega o HTML da raiz
+    return render_template("index.html") 
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -52,4 +52,4 @@ def chat():
     return jsonify({"resposta": resposta})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
