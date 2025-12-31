@@ -2,56 +2,88 @@ from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
-ListaDeProdutos = {
-    "sofa": "R$ 1.500,00",
-    "sofá": "R$ 1.500,00",
-    "mesa": "R$ 700,00",
-    "cadeira": "R$ 250,00"
-}
-#nessa função colocar as respostas é crucial
-#lembre-se que utilizar o if ou a biblioteca para situações diferentes
 def Responder(pergunta):
     pergunta = pergunta.lower()
 
-    for produto in ListaDeProdutos:
-        if produto in pergunta:
-            return f"O preço do(a) {produto.title()} é {ListaDeProdutos[produto]}."
-
-    if "preço" in pergunta or "preco" in pergunta or "presso" in pergunta or "preso" in pergunta:
-        return "De qual produto você gostaria de saber o preço?"
-    
-    if "qual o seu objetivo" in pergunta or "faz" in pergunta: 
-        return "Sou um chatbot demonstrativo, possuo uma quantidade limitada de interações. Posso responder dados, como uma pequena lista de produtos de casaque eu tenho, como uma cama, um sofá e uma mesa."
+    if "qual o seu objetivo" in pergunta or "o que você faz" in pergunta:
+        return (
+            "Sou um chatbot demonstrativo criado por Vinicius Duarte. "
+            "Posso apresentar seu perfil profissional, habilidades técnicas, "
+            "projetos e formas de contato."
+        )
 
     if "desenvolveu" in pergunta or "desenvolvedor" in pergunta or "dev" in pergunta:
-        return "Bom, fui desenvolvido por Vinicius Duarte, pode contacta-lo pelo LinkedIn ou pelo Github que estão no roda-pé da página."
+        return (
+            "Fui desenvolvido por Vinicius Duarte. "
+            "Você pode acessar o GitHub dele aqui:\n"
+            "https://github.com/SEU_USUARIO"
+        )
+
+    if "vinicius" in pergunta:
+        return (
+            "Vinicius Duarte é desenvolvedor júnior, com foco em sistemas web, "
+            "automações e análise de dados. Atua com Python, Flask e banco de dados."
+        )
 
     respostas = {
-        "1":"Sou um chatBot desenvolvido por Vinícius Duarte, meu objetivo é simular um atendimento real de um marketplace, porém posso ser utilizado para outros objetivos",
-        "2":"Informações sobre o Vinícius Duarte, estão link a seguir",
-        "0": "Até logo!",
+        "1": (
+            "O Vinicius Duarte é desenvolvedor júnior, com experiência em desenvolvimento de sistemas e automações.\n\n"
+            "Possui perfil autodidata e está sempre aprimorando suas habilidades."
+        ),
+
+        "2": (
+            "🖥 Linguagens:\n"
+            "- Python\n- JavaScript\n- Pascal\n- Delphi\n- Java\n\n"
+            "🌐 Web:\n"
+            "- HTML\n- CSS\n- Flask\n- Django\n\n"
+            "🗄 Banco de Dados:\n"
+            "- MySQL\n- SQLite\n\n"
+            "📊 Dados:\n"
+            "- Pandas\n- Excel\n- SQL\n\n"
+            "📦 Outros:\n"
+            "- Git e GitHub\n"
+            "- Desenvolvimento de apps com Kivy"
+        ),
+
+        "3": (
+            "Projetos desenvolvidos incluem sistemas em Python, automação de documentos, aplicações web com Flask e integração com banco de dados."
+        ),
+
+        "4": (
+            "O Vinicius já atuou profissionalmente com desenvolvimento de sistemas, trabalhando com Python, banco de dados e aplicações web."
+            "Participou do desenvolvimento e manutenção de soluções internas e automações no seu ambiente de trabalho, visando sempre otimizar e economizar tempo em tarefas."
+        ),
+
+        "5": (
+            "O objetivo do Vinicius é atuar como Desenvolvedor Júnior, aprimorar suas habilidades técnicas e crescer profissionalmente."
+        ),
+
+        "6": (
+            "Você pode entrar em contato com o Vinicius pelos canais abaixo:\n\n"
+            "🔗 GitHub:\nhttps://github.com/ViniciusDuarteG\n\n"
+            "🔗 LinkedIn:\nhttps://www.linkedin.com/in/vinicius-duarte-348705170/"
+        ),
+
         "bom dia": "Olá! Em que posso te ajudar?",
-        "oi":"Olá! Em que posso te ajudar?",
-        "olá":"Olá! Em que posso te ajudar?",
-        "boa tarde":"Olá! Em que posso te ajudar?",
-        "boa noite":"Olá! Em que posso te ajudar?",
-        "ola":"Olá! Em que posso te ajudar?",
+        "boa tarde": "Olá! Em que posso te ajudar?",
+        "boa noite": "Olá! Em que posso te ajudar?",
+        "oi": "Olá! Em que posso te ajudar?",
+        "olá": "Olá! Em que posso te ajudar?",
+        "ola": "Olá! Em que posso te ajudar?"
     }
 
     return respostas.get(pergunta, "Desculpe, não entendi sua pergunta.")
 
 @app.route("/")
 def index():
-    return render_template("index.html") 
+    return render_template("index.html")
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    print("Olá, \n1 - Informações do chatbot\n2 - Informações do desenvolvedor\n0 - Encerrar o atendimento")
     dados = request.get_json()
     pergunta = dados.get("mensagem", "")
     resposta = Responder(pergunta)
     return jsonify({"resposta": resposta})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
-
+    app.run(host="0.0.0.0", port=10000, debug=True)
